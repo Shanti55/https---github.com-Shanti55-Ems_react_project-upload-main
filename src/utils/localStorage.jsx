@@ -1,7 +1,11 @@
 // utils/localStorage.js
 
 const employees = [
-    // ... tera pura employee data yahan
+    {
+      id: 1,
+      email: "shanti123gmail.com", // ya jo bhi email tu App.jsx mein use kar rahi hai
+      password: "123"
+    }
   ];
   
   const admin = [
