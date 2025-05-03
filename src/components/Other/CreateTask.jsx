@@ -11,23 +11,36 @@ const CreateTask = () => {
     const [asignTo, setAsignTo] = useState('')
     const [category, setCategory] = useState('')
 
-    const [newTask, setNewTask] = useState({})
-
     const submitHandler = (e) => {
         e.preventDefault()
 
-        setNewTask({ taskTitle, taskDescription, taskDate, category, active: false, newTask: true, failed: false, completed: false })
+        const taskObject = {
+            taskTitle,
+            taskDescription,
+            taskDate,
+            category,
+            active: false,
+            newTask: true,
+            failed: false,
+            completed: false,
+            taskCounts:{ 
+                newTask: true,
+                active: false,
+                completed: false, 
+                failed: false,
+            }
+        }
 
-        const data = userData
+        const data = [...userData]
 
-        data.forEach(function (elem) {
-            if (asignTo == elem.firstName) {
-                elem.tasks.push(newTask)
-                elem.taskCounts.newTask = elem.taskCounts.newTask + 1
+        data.forEach((elem) => {
+            if (asignTo === elem.firstName) {
+                elem.tasks.push(taskObject)
+                elem.taskCounts.newTask += 1
             }
         })
+
         setUserData(data)
-        console.log(data);
 
         setTaskTitle('')
         setCategory('')
@@ -89,8 +102,14 @@ const CreateTask = () => {
                     <textarea value={taskDescription}
                         onChange={(e) => {
                             setTaskDescription(e.target.value)
-                        }} className='w-full h-44 text-sm py-2 px-4 rounded outline-none bg-transparent border-[1px] border-gray-400' name="" id=""></textarea>
-                    <button className='bg-emerald-500 py-3 hover:bg-emerald-600 px-5 rounded text-sm mt-4 w-full'>Create Task</button>
+                        }} className='w-full h-44 text-sm py-2 px-4 rounded outline-none bg-transparent border-[1px] border-gray-400' name="" id="">
+                    </textarea>
+                    <button
+                        type='submit'
+                        className='bg-emerald-500 py-3 hover:bg-emerald-600 px-5 rounded text-sm mt-4 w-full'
+                    >
+                        Create Task
+                    </button>
                 </div>
 
             </form>
