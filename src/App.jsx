@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import Login from './components/Auth/Login';
 import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
-import { AuthContext } from './context/AuthProvider'
 import Singup from './components/Auth/Singup';
 import { setLocalStorage } from './utils/localStorage';
 
@@ -11,7 +10,7 @@ const App = () => {
   const [user, setUser] = useState(null)
   const [isSignuped, setIsSignuped] = useState(false)
   const [loggedInUserData, setLoggedInUserData] = useState(null)
-  const [userData, SetUserData] = useContext(AuthContext)
+  const userData = JSON.parse(localStorage.getItem('employees'));
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem('loggedInUser')
@@ -19,12 +18,12 @@ const App = () => {
     if (loggedInUser) {
       const userData = JSON.parse(loggedInUser)
       setUser(userData.role)
+      setIsSignuped(true);
       setLoggedInUserData(userData.data)
     }
 
   }, [])
 
-  // 
 
   const handleLogin = (email, password) => {
     if (email == "admin@example.com" && password == '123') {
@@ -44,24 +43,22 @@ const App = () => {
   }
 
   const handleSignup = (email, password, firstName, lastName) => {
-    console.log(email)
-
     if ([email, password, firstName, lastName].some(field => field === null || field === "")) {
       console.alert("All field  required");
-      
       return;
-
     }
     const newEmployee = [
       {
+        id: 5,
         email,
         password,
         firstName,
-        lastName
+        lastName,
+        tasks: [],
+        taskCounts: 0,
       }
     ]
     setLocalStorage(newEmployee);
- 
     setIsSignuped(true);
 
   }
@@ -70,13 +67,11 @@ const App = () => {
     <>
       {!isSignuped
         ? <Singup handleSignup={handleSignup} />
-
-        :
-<>
-        {!user ? <Login handleLogin={handleLogin} /> : ''} 
+        : <>
+          {!user ? <Login handleLogin={handleLogin} /> : ''}
+          {user == 'admin' ? <AdminDashboard changeUser={setUser} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null)}
         </>
-}
-      {user == 'admin' ? <AdminDashboard changeUser={setUser} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null)}
+      }
     </>
   )
 }

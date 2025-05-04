@@ -19,38 +19,29 @@ const CreateTask = () => {
             taskDescription,
             taskDate,
             category,
-            active: false,
             newTask: true,
+            active: false,
             failed: false,
             completed: false,
-            taskCounts:{ 
-                newTask: true,
-                active: false,
-                completed: false, 
-                failed: false,
-            }
         }
 
         const data = [...userData]
 
-        console.log("data - ", data);
-        
         data.forEach((elem) => {
-            if (asignTo === elem.firstName) {
+            if (asignTo.trim().toLowerCase() === elem.firstName.trim().toLowerCase()) {
                 elem.tasks.push(taskObject)
-                elem.taskCounts.newTask += 1
+                elem.newTask = elem.newTask++ ? elem.newTask++ : 1;
             }
         })
 
-        console.log("data after  - ", data);
-
         setUserData(data)
+        localStorage.setItem('employees', JSON.stringify(data));
 
-        // setTaskTitle('')
-        // setCategory('')
-        // setAsignTo('')
-        // setTaskDate('')
-        // setTaskDescription('')
+        setTaskTitle('')
+        setCategory('')
+        setAsignTo('')
+        setTaskDate('')
+        setTaskDescription('')
 
     }
 

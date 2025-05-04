@@ -14,8 +14,6 @@ const Singup = ( {handleSignup}) => {
     const submitHandler = (e) => {
         e.preventDefault()
         handleSignup(email, password , name.firstName,name.lastName)
-        setEmail("")
-        setPassword("")
     }
 
 
