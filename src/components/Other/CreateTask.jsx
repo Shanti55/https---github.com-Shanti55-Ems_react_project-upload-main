@@ -33,6 +33,8 @@ const CreateTask = () => {
 
         const data = [...userData]
 
+        console.log("data - ", data);
+        
         data.forEach((elem) => {
             if (asignTo === elem.firstName) {
                 elem.tasks.push(taskObject)
@@ -40,13 +42,15 @@ const CreateTask = () => {
             }
         })
 
+        console.log("data after  - ", data);
+
         setUserData(data)
 
-        setTaskTitle('')
-        setCategory('')
-        setAsignTo('')
-        setTaskDate('')
-        setTaskDescription('')
+        // setTaskTitle('')
+        // setCategory('')
+        // setAsignTo('')
+        // setTaskDate('')
+        // setTaskDescription('')
 
     }
 

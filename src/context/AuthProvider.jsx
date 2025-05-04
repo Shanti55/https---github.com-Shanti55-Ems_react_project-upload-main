@@ -23,7 +23,7 @@ const AuthProvider = ({ children }) => {
             }, [100]);
             setDatasetted(true);
         }
-    }, []);
+    }, [datasetted]);
 
 
 
