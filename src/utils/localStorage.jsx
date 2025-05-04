@@ -17,11 +17,14 @@ const employees = [
     }
   ];
   
-  export const setLocalStorage = () => {
+  export const setLocalStorage = (newEmployee=null) => {
     const existingEmployees = localStorage.getItem('employees');
     const existingAdmin = localStorage.getItem('admin');
-  
-    console.log(employees)
+
+   if (newEmployee){
+    localStorage.setItem('employees', JSON.stringify(newEmployee));
+   }
+    
     if (!existingEmployees) {
       localStorage.setItem('employees', JSON.stringify(employees));
     }
