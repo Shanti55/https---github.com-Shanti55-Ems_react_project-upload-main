@@ -4,6 +4,7 @@ import EmployeeDashboard from './components/Dashboard/EmployeeDashboard'
 import AdminDashboard from './components/Dashboard/AdminDashboard'
 import { AuthContext } from './context/AuthProvider'
 import Singup from './components/Auth/Singup';
+import { setLocalStorage } from './utils/localStorage';
 
 const App = () => {
 
@@ -43,9 +44,11 @@ const App = () => {
   }
 
   const handleSignup = (email, password, firstName, lastName) => {
+    console.log(email)
 
     if ([email, password, firstName, lastName].some(field => field === null || field === "")) {
       console.alert("All field  required");
+      
       return;
 
     }
@@ -58,7 +61,8 @@ const App = () => {
       }
     ]
     setLocalStorage(newEmployee);
-
+ 
+    setIsSignuped(true);
 
   }
 
@@ -66,9 +70,11 @@ const App = () => {
     <>
       {!isSignuped
         ? <Singup handleSignup={handleSignup} />
-        :
 
-        {!user ? <Login handleLogin={handleLogin} /> : ''}
+        :
+<>
+        {!user ? <Login handleLogin={handleLogin} /> : ''} 
+        </>
 }
       {user == 'admin' ? <AdminDashboard changeUser={setUser} /> : (user == 'employee' ? <EmployeeDashboard changeUser={setUser} data={loggedInUserData} /> : null)}
     </>

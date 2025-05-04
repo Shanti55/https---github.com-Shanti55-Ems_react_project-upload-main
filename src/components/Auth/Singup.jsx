@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 
-const Singup = ({ handleLogin }) => {
+const Singup = ( {handleSignup}) => {
 
     const [name, setName] = useState({
         firstName: "",
@@ -13,7 +13,7 @@ const Singup = ({ handleLogin }) => {
 
     const submitHandler = (e) => {
         e.preventDefault()
-        handleLogin(email, password)
+        handleSignup(email, password , name.firstName,name.lastName)
         setEmail("")
         setPassword("")
     }
@@ -35,7 +35,7 @@ const Singup = ({ handleLogin }) => {
                         }}
                         required
                         autoComplete="email"
-                        className='outline-none bg-transparent border-2 border-emerald-600 font-medium text-lg py-2 px-6 rounded-full placeholder:text-gray-400' type="email" placeholder='Enter your email'
+                        className='outline-none bg-transparent border-2 border-emerald-600 font-medium text-lg py-2 px-6 rounded-full placeholder:text-gray-400 mb-3' type="email" placeholder='Enter your email'
                     />
                     <input
                         value={name.firstName}
@@ -49,7 +49,8 @@ const Singup = ({ handleLogin }) => {
                         }}
                         required
                         //autoComplete="email"
-                        className='outline-none bg-transparent border-2 border-emerald-600 font-medium text-lg py-2 px-6 rounded-full placeholder:text-gray-400' type="email" placeholder='Enter your email'
+                        className='outline-none bg-transparent border-2 border-emerald-600 font-medium text-lg py-2 px-6 rounded-full placeholder:text-gray-400 mb-3'
+                        type="text" placeholder='Enter your First Name'
                     />
                     <input
                         value={name.lastName}
@@ -63,9 +64,10 @@ const Singup = ({ handleLogin }) => {
                         }}
                         required
                         //autoComplete="email"
-                        className='outline-none bg-transparent border-2 border-emerald-600 font-medium text-lg py-2 px-6 rounded-full placeholder:text-gray-400' type="email" placeholder='Enter your email'
-                    />
+                        className='outline-none bg-transparent border-2 border-emerald-600 font-medium text-lg py-2 px-6 rounded-full placeholder:text-gray-400 ' 
+                        type="text" placeholder='Enter your Last Name'
 
+                    />
                     <input
                         value={password}
                         onChange={(e) => {
