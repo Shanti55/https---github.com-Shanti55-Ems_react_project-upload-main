@@ -2,8 +2,8 @@
 
 const employees = [
     {
-      id: 1,
-      email: "shanti123gmail.com", // ya jo bhi email tu App.jsx mein use kar rahi hai
+      id: 2,
+      email: "shanti123@gmail.com", // ya jo bhi email tu App.jsx mein use kar rahi hai
       password: "123"
     }
   ];
@@ -18,9 +18,10 @@ const employees = [
   
   export const setLocalStorage = () => {
     const existingEmployees = localStorage.getItem('employees');
+    console.log("existingEmployees", existingEmployees);
     const existingAdmin = localStorage.getItem('admin');
   
-    if (!existingEmployees) {
+    if (existingEmployees?.length === 0) {
       localStorage.setItem('employees', JSON.stringify(employees));
     }
   
